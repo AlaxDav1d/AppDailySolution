@@ -5,10 +5,87 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import backImage from '../../../assets/backGround.jpg';
 import logo from '../../../assets/logo.png';
+import { useState } from "react";
 
 
-export default function Login1({ navigation }){
-     return (
+export default  function Login1({ navigation }){
+
+    const[password,setPassword] = useState();
+    const[username,setUsername]=useState();
+    const[nova,setNova] = useState();   
+    
+    const API_URL = 'https://dailysolution.000webhostapp.com//classLogin.php';
+    const API_LINK = 'https://dailysolution.000webhostapp.com//confEmailTel.php';
+    const onPressHandler = async()=>{
+      const headers ={
+        'Accept': 'application/json',
+        'Content-Type' : 'application/json',
+        'Acess-Control-Allow-Origin':'*',
+      }
+      const response = await fetch(`${API_LINK}`,{
+            method: "POST",
+            headers,
+            body: JSON.stringify({
+              user: username,
+            })
+      });
+      const recebido = await response.json();
+      console.log(recebido.status);
+      if(recebido.status == 1){
+        alert('Email ou Senha invalidos');
+      }else{
+
+                
+      const headers ={
+        'Accept': 'application/json',
+        'Content-Type' : 'application/json',
+        'Acess-Control-Allow-Origin':'*',
+      }
+      const response = await fetch(`${API_URL}`,{
+            method: "POST",
+            headers,
+            body: JSON.stringify({
+              senha:password,
+              user: username,
+            })
+      });     
+    let require = await response.json();
+    let nova = require.meta;
+    let nova2 = require.status;
+
+    console.log(nova);
+    if(nova2 == 2){
+      alert('Email ou Senha invalidos');
+    }else{
+    if(nova == '"cardio"'){
+      nova = 'exercitar';
+    }else if(nova == '"musculo"'){
+      nova = 'ganhar';
+    }else if(nova == '"resistencia"'){
+      nova = 'perder';
+    }else{
+      nova = nova;
+    }
+    switch(nova){
+      case'ganhar':
+      alert('Login Realizado com Sucesso');
+      navigation.navigate('Main',{nova});
+      break;
+      case 'perder':
+        alert('Login Realizado com Sucesso');
+        navigation.navigate('Main',{nova});
+        break;
+      case 'exercitar':
+        alert('Login Realizado com Sucesso');
+        navigation.navigate('Main',{nova});
+        break;
+    }}
+
+
+      }
+
+    }
+    return (
        <View style={styles.container} >
          <ImageBackground source={backImage} style={styles.background}>
          <StatusBar />
@@ -19,15 +96,15 @@ export default function Login1({ navigation }){
             <Text style={styles.login}>Login</Text>
              <View style={{gap:10}}>
                <Text style={styles.span}>E-mail</Text>
-               <TextInput style={styles.input} onChangeText={(text)=>setUsuario(text)}/>
+               <TextInput style={styles.input} onChangeText={(text)=>setUsername(text)}/>
                <Text style={styles.span}>Senha</Text>
-               <TextInput style={styles.input}onChangeText={(senhaTxt)=>setSenha(senhaTxt)} />
-               <TouchableOpacity><Text style={styles.button}>Realizar Login</Text></TouchableOpacity>
+               <TextInput style={styles.input}onChangeText={(senhaTxt)=>setPassword(senhaTxt)} />
+               <TouchableOpacity onPress={onPressHandler}><Text style={styles.button}>Realizar Login</Text></TouchableOpacity>
              </View>
              <Text style={styles.pergunta}>Não é registrado ainda?</Text>
    
              <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
-               <Text style={{fontSize:30,color:'#0046B5',fontWeight:'900'}  }>Cadastre-se</Text>
+               <Text style={{fontSize:30,color:'#0046B5',fontWeight:'900'}}>Cadastre-se</Text>
              </TouchableOpacity>
            </View>
            <View style={styles.info}>
@@ -77,8 +154,8 @@ export default function Login1({ navigation }){
        height: 30,
        borderWidth: 1,
        borderColor:'#0046B5',
-       padding: 10,
        width:250,
+       paddingLeft:4,
      },
      button:{
       textAlign:"center",

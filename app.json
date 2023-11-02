@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "Daily Solution",
+    "slug": "Daily-Solution",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/backGround.jpg",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/backGround.jpg",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.alxxd.DailySolution"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c2267b40-579b-4336-aeae-78618fe2f6a8"
+      }
     }
   }
 }

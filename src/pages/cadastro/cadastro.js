@@ -8,8 +8,56 @@ import logo from '../../../assets/logo.png';
 
 import { useState } from "react";
 
+
 export default function Cadastro({ navigation }){
+     const[usuario,setUsuario]= useState();
+     const[email,setEmail]= useState();
+     const[senha,setSenha]= useState();
+     const[confSenha,setConfSenha]= useState();
      const [valor,setValor] = useState(0);
+     const API_URL = 'https://dailysolution.000webhostapp.com//cadastro.php';
+
+
+     async function cadastro(){
+          if(senha === confSenha){
+               if(valor == 1){
+                    meta = 'ganhar'
+               }else if(valor == 2){
+                    meta = 'perder'
+               }else{
+                    meta = 'exercitar'
+               }
+               console.log(meta);
+               const config={ 
+                    method:'post',
+                   headers:{ 'Accept': 'application/json', 
+                               'Content-Type' : 'application/json'},
+                   body:JSON.stringify({
+                       nome: usuario,
+                       email: email, 
+                       senha: senha,
+                       foco: meta
+                   })               
+               }
+               console.log(config);
+               const enviado =await fetch(`${API_URL}`,config);
+               const require =await enviado.json();
+               if(require == 'ganhar'){
+                    
+                    navigation.navigate('Main',{require});
+               }else if(require == 'perder'){
+                    
+                    navigation.navigate('Main',{require});
+               }else{
+                    navigation.navigate('Main',{require});
+               }
+
+          }else{
+               alert('As senhas não coincidem');
+          }
+
+     }
+
      return(
           <View style={styles.container}>
               <ImageBackground source={backImage} style={styles.background}>
@@ -21,11 +69,11 @@ export default function Cadastro({ navigation }){
                               <Text style={styles.span}>Nome Completo</Text>
                               <TextInput style={styles.input} onChangeText={(text)=>setUsuario(text)}/>
                               <Text style={styles.span}>E-mail</Text>
-                              <TextInput style={styles.input}onChangeText={(senhaTxt)=>setSenha(senhaTxt)} />
+                              <TextInput style={styles.input}onChangeText={(emailTxt)=>setEmail(emailTxt)} />
                               <Text style={styles.span}>Senha</Text>
                               <TextInput style={styles.input}onChangeText={(senhaTxt)=>setSenha(senhaTxt)} />
                               <Text style={styles.span}>Confirmar Senha</Text>
-                              <TextInput style={styles.input}onChangeText={(senhaTxt)=>setSenha(senhaTxt)} />
+                              <TextInput style={styles.input}onChangeText={(senhaTxt)=>setConfSenha(senhaTxt)} />
                               <Text style={{color:'#0046B5',fontWeight:"bold",fontSize:20,alignSelf:"center"}}>Qual o Seu Objetivo?</Text>
                              <View style={{flexDirection:'row',gap:20,alignSelf:'center',width:"100%"}}>
                              <TouchableOpacity onPress={()=>setValor(1)}>
@@ -56,7 +104,7 @@ export default function Cadastro({ navigation }){
                                    </View>
                               </TouchableOpacity>
                              </View>
-                             <TouchableOpacity style={{alignSelf:"center"}} onPress={()=> navigation.navigate('Main')} >
+                             <TouchableOpacity style={{alignSelf:"center"}} onPress={cadastro} >
                                    <Text style={styles.login}>Inscrever-se</Text>
                               </TouchableOpacity>
                          </View>
@@ -97,7 +145,7 @@ const styles = StyleSheet.create({
        height: 30,
        borderWidth: 1,
        borderColor:'#0046B5',
-       padding: 10,
+       paddingLeft: 4,
        width:250,
      },
    login:{
