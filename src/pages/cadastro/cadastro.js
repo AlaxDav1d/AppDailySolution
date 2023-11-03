@@ -27,7 +27,7 @@ export default function Cadastro({ navigation }){
                }else{
                     meta = 'exercitar'
                }
-               console.log(meta);
+
                const config={ 
                     method:'post',
                    headers:{ 'Accept': 'application/json', 
@@ -39,17 +39,18 @@ export default function Cadastro({ navigation }){
                        foco: meta
                    })               
                }
-               console.log(config);
                const enviado =await fetch(`${API_URL}`,config);
                const require =await enviado.json();
-               if(require == 'ganhar'){
-                    
-                    navigation.navigate('Main',{require});
-               }else if(require == 'perder'){
-                    
-                    navigation.navigate('Main',{require});
+               let nova = meta;
+               if(meta == 'ganhar'){
+                    alert("Cadastro realizado com sucesso");
+                    navigation.navigate('Main',{nova});
+               }else if(meta == 'perder'){
+                    alert("Cadastro realizado com sucesso");
+                    navigation.navigate('Main',{nova});
                }else{
-                    navigation.navigate('Main',{require});
+                    alert("Cadastro realizado com sucesso");
+                    navigation.navigate('Main',{nova});
                }
 
           }else{
