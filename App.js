@@ -2,19 +2,7 @@ import * as React from 'react';
 import { ImageBackground, StyleSheet, View,Button} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StatusBar } from 'expo-status-bar';
 
-function ProfileScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title="Ir para login"
-        onPress={() => navigation.navigate('Login')}
-      />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
-  );
-}
 function SettingsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -29,7 +17,7 @@ const Stack = createNativeStackNavigator();
 
 function MyStack() {
   return (
-    <Stack.Navigator screenOptions={{headerShown:false}} >
+    <Stack.Navigator screenOptions={{headerShown:false}}>
       <Stack.Screen name="Login1" component={Login1}  />
       <Stack.Screen name="Cadastro" component={Cadastro} />
       <Stack.Screen name="Main" component={Main} />

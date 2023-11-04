@@ -1,9 +1,10 @@
 import { ImageBackground, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import backImage from '../../../assets/backGround.jpg';
+import backImage from '../../../assets/backGround.png';
 import { useState } from "react";
 import { Quadro } from "../../components/quadro";
 import { BlocoPeso } from "../../components/blocoPeso";
 import { Exercitar } from "../../components/exercicio";
+import * as Animatable from 'react-native-animatable';
 
 export function Main({route}){
      const[nova,setNova] = useState();
@@ -13,7 +14,7 @@ export function Main({route}){
           <SafeAreaView>
                <StatusBar ></StatusBar>
                <ScrollView>
-               <View style={estilos.container}>
+               <Animatable.View style={estilos.container}  animation='fadeInUpBig'  delay={600}>
 
                <ImageBackground source={backImage} style={estilos.back}>
                     <Text style={estilos.title}>Olá Usuario</Text>
@@ -31,7 +32,7 @@ export function Main({route}){
                ):(<Exercitar/>)}
 
                
-          </View>
+          </Animatable.View>
                </ScrollView>
           </SafeAreaView>
      )

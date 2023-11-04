@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View,Button, Image } from 'react-native';
+import { ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View,Button, Image, Alert } from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
-import backImage from '../../../assets/backGround.jpg';
+import backImage from '../../../assets/backGround.png';
 import logo from '../../../assets/logo.png';
 import { useState } from "react";
 
@@ -85,6 +85,7 @@ export default  function Login1({ navigation }){
       }
 
     }
+    
     return (
        <View style={styles.container} >
          <ImageBackground source={backImage} style={styles.background}>
@@ -92,7 +93,7 @@ export default  function Login1({ navigation }){
            <Animatable.View animation='fadeInUpBig'  style={styles.logo}>
              <Image source={logo} style={{height:100,width:100}}/>
            </Animatable.View>
-           <Animatable.View animation='fadeInUpBig' delay={300} style={styles.form} >
+           <Animatable.View animation='fadeInUpBig' delay={600} style={styles.form} >
             <Text style={styles.login}>Login</Text>
              <View style={{gap:10}}>
                <Text style={styles.span}>E-mail</Text>
@@ -107,7 +108,7 @@ export default  function Login1({ navigation }){
                <Text style={{fontSize:30,color:'#0046B5',fontWeight:'900'}}>Cadastre-se</Text>
              </TouchableOpacity>
            </Animatable.View>
-           <Animatable.View animation='fadeInUpBig' delay={600} style={styles.info}>
+           <Animatable.View animation='fadeInUpBig' delay={900} style={styles.info}>
              <Text style={{width:280,textAlign:'center'}}>
               <Text style= {{textAlign:'center',color:'#0046B5',letterSpacing:1,fontWeight:400}}> O aplicativo <Text style={{fontWeight:700}}>Daily Solution</Text> é uma </Text>
                <Text style={{textAlign:'center',color:'#0046B5',letterSpacing:1,fontWeight:400}}>ferramenta de saúde que ajuda os </Text>

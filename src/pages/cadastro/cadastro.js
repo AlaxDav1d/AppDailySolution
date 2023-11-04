@@ -3,9 +3,9 @@ import * as React from 'react';
 import { Button, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import backImage from '../../../assets/backGround.jpg';
+import backImage from '../../../assets/backGround.png';
 import logo from '../../../assets/logo.png';
-
+import * as Animatable from 'react-native-animatable';
 import { useState } from "react";
 
 
@@ -62,10 +62,10 @@ export default function Cadastro({ navigation }){
      return(
           <View style={styles.container}>
               <ImageBackground source={backImage} style={styles.background}>
-                    <View style={styles.logo}>
+                    <Animatable.View style={styles.logo}  animation='fadeInUpBig'>
                          <Image source={logo} style={{height:100,width:100}}/>
-                    </View>
-                    <View style={styles.form}>
+                    </Animatable.View>
+                    <Animatable.View style={styles.form} animation='fadeInUpBig' delay={600}>
                          <View style={{gap:10}}>
                               <Text style={styles.span}>Nome Completo</Text>
                               <TextInput style={styles.input} onChangeText={(text)=>setUsuario(text)}/>
@@ -105,11 +105,11 @@ export default function Cadastro({ navigation }){
                                    </View>
                               </TouchableOpacity>
                              </View>
-                             <TouchableOpacity style={{alignSelf:"center"}} onPress={cadastro} >
+                             < TouchableOpacity style={{alignSelf:"center"}} onPress={cadastro} >
                                    <Text style={styles.login}>Inscrever-se</Text>
                               </TouchableOpacity>
                          </View>
-                    </View>
+                    </Animatable.View>
                </ImageBackground>
           </View>
      )
